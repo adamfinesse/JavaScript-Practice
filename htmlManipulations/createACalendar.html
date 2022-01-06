@@ -1,0 +1,132 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <style>
+    table {
+      border-collapse: collapse;
+    }
+
+    td,
+    th {
+      border: 1px solid black;
+      padding: 3px;
+      text-align: center;
+    }
+
+    th {
+      font-weight: bold;
+      background-color: #E6E6E6;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <div id="calendar"></div>
+
+  <script>
+      //https://javascript.info/task/calendar-table
+
+      const daysOfWeek = ["MO","TU","WE","TH","FR","SA","SU"];
+
+    function createCalendar(elem, year, month) {
+        let table = document.createElement("table");
+        let trDays = document.createElement("tr");
+        let tBody = document.createElement("tbody");
+
+        for(let day of daysOfWeek){ //adds th elements as a row for each day of the week
+            let cell = document.createElement("th");
+            cell.innerText += day;
+            trDays.append(cell);
+        }
+
+        tBody.append(trDays); // adds the th list of days to tbody so we can interact with it in the following for loops
+
+        for(let i =0;i<5;i++){ // adds 5 rows to the table for the entire calendar dates
+
+            let row = document.createElement('tr');
+
+            for(let j =0; j<7;j++){ // adds 7 cells for each day of the week
+
+                let cell = document.createElement('td');
+                row.append(cell); // adds the cell to the row
+
+            }
+
+            trDays.after(row); // puts the entire row after the list of weekdays
+
+        }
+
+        table.append(tBody); // adds the tbody with the previous elements so its ready to be added to the elem
+        elem.append(table); // appends the table to the elem so we can add each date in the following for loops
+
+        let date = new Date(year,month,0); // gets the date for each time its called with year and month and turns it into a variable
+        let amtDays = date.getDate();
+
+        for(let rowLen = table.rows.length-1;rowLen>0;rowLen--){ // loops through all the rows starting from the last and goes till the first (before th row)
+
+            for(cellLen = table.rows[rowLen].cells.length-1;cellLen>=0;cellLen--){ // loops through all the cels in each row and if the days is above 0 it adds that text to html
+
+                if(amtDays == 0){ 
+                    break;
+                }
+
+                table.rows[rowLen].cells[cellLen].innerHTML = amtDays--;
+            }
+        }
+    }
+
+    createCalendar(calendar, 2012, 9);
+    /* websites solution
+        function createCalendar(elem, year, month) {
+
+      let mon = month - 1; // months in JS are 0..11, not 1..12
+      let d = new Date(year, mon);
+
+      let table = '<table><tr><th>MO</th><th>TU</th><th>WE</th><th>TH</th><th>FR</th><th>SA</th><th>SU</th></tr><tr>';
+
+      // spaces for the first row
+      // from Monday till the first day of the month
+      // * * * 1  2  3  4
+      for (let i = 0; i < getDay(d); i++) {
+        table += '<td></td>';
+      }
+
+      // <td> with actual dates
+      while (d.getMonth() == mon) {
+        table += '<td>' + d.getDate() + '</td>';
+
+        if (getDay(d) % 7 == 6) { // sunday, last day of week - newline
+          table += '</tr><tr>';
+        }
+
+        d.setDate(d.getDate() + 1);
+      }
+
+      // add spaces after last days of month for the last row
+      // 29 30 31 * * * *
+      if (getDay(d) != 0) {
+        for (let i = getDay(d); i < 7; i++) {
+          table += '<td></td>';
+        }
+      }
+
+      // close the table
+      table += '</tr></table>';
+
+      elem.innerHTML = table;
+    }
+
+    function getDay(date) { // get day number from 0 (monday) to 6 (sunday)
+      let day = date.getDay();
+      if (day == 0) day = 7; // make Sunday (0) the last day
+      return day - 1;
+    }
+    */
+
+  </script>
+
+</body>
+</html>

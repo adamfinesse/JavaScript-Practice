@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html>
+<body>
+<head>
+    <style>
+    .hour {
+      color: red
+    }
+
+    .min {
+      color: green
+    }
+
+    .sec {
+      color: blue
+    }
+  </style>
+    </style>
+</head>
+<div id="clock">
+    <span class="hour">hh</span>:<span class="min">mm</span>:<span class="sec">ss</span>
+  </div>
+  <!-- click on this button calls clockStart() -->
+  <input type="button" onclick="clockStart()" value="Start">
+
+  <!-- click on this button calls clockStop() -->
+  <input type="button" onclick="clockStop()" value="Stop">
+
+
+<script>
+    //https://javascript.info/task/clock-setinterval
+    let interval;
+    let clock = document.getElementById("clock");
+
+      function clockStart(){
+        if(!interval){
+          interval =setInterval(() => {
+            
+            let date = new Date();
+            let hours = date.getHours();
+            let minutes = date.getMinutes()
+            let seconds = date.getSeconds();
+
+            if(hours < 10) hours = '0'+hours;
+            if(minutes<10) minutes = '0'+minutes;
+            if(seconds<10) seconds = '0'+ seconds;
+
+            clock.children[0].innerHTML = hours;
+            clock.children[1].innerHTML = minutes;
+            clock.children[2].innerHTML = seconds;
+            
+            //clock.innerHTML = `${hours}:${minutes}:${seconds}`
+          } , 1000);
+        }
+    }
+    function clockStop(){
+        clearInterval(interval);
+        interval = null;
+    }
+</script>
+</body>
+</html>

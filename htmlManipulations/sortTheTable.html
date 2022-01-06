@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <table id="table">
+            <thead>
+              <tr>
+                <th>Name</th><th>Surname</th><th>Age</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>John</td><td>Smith</td><td>10</td>
+              </tr>
+              <tr>
+                <td>Pete</td><td>Brown</td><td>15</td>
+              </tr>
+              <tr>
+                <td>Ann</td><td>Lee</td><td>5</td>
+              </tr>
+              <tr>
+                <td>...</td><td>...</td><td>...</td>
+              </tr>
+            </tbody>
+            </table>
+
+            <script>
+                let table = document.getElementById("table");
+                let nameArr = [];
+
+                for(let colLen = 1;colLen<table.rows.length-1;colLen++){
+                    nameArr.push(table.rows[colLen].cells[0].innerHTML);
+                }
+
+                nameArr.sort(sortByName);
+
+                for(let colLen = 1;colLen<table.rows.length-1;colLen++){
+                    table.rows[colLen].cells[0].innerHTML = nameArr.shift();
+                }
+                
+                function sortByName(a,b){
+                    return a.localeCompare(b);
+                }
+
+                /* better and shorter solution
+                let sortedRows = Array.from(table.tBodies[0].rows) // 1
+                .sort((rowA, rowB) => rowA.cells[0].innerHTML.localeCompare(rowB.cells[0].innerHTML)); //(2)
+
+                table.tBodies[0].append(...sortedRows); // (3)
+
+                1. Get all <tr>, from <tbody>.
+                2. Then sort them comparing by the content of the first <td> (the name field).
+                3. Now insert nodes in the right order by .append(...sortedRows).
+
+                P.S. In our case, there’s an explicit <tbody> in the table, but even if HTML table doesn’t have <tbody>, the DOM structure always has it.
+                */
+            </script>
+
+    </body>
+</html>

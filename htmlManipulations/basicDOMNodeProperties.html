@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+<body>
+
+  <ul>
+    <li>Animals
+      <ul>
+        <li>Mammals
+          <ul>
+            <li>Cows</li>
+            <li>Donkeys</li>
+            <li>Dogs</li>
+            <li>Tigers</li>
+          </ul>
+        </li>
+        <li>Other
+          <ul>
+            <li>Snakes</li>
+            <li>Birds</li>
+            <li>Lizards</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Fishes
+      <ul>
+        <li>Aquarium
+          <ul>
+            <li>Guppy</li>
+            <li>Angelfish</li>
+          </ul>
+        </li>
+        <li>Sea
+          <ul>
+            <li>Sea trout</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+  <script>
+      "use strict";
+      
+    for(let elem of document.querySelectorAll("li")){
+        let text = elem.firstChild.data; // after the elem (li) the first child is the white text (text node) and the string is stored in the data property
+        if(text.includes("\n")) text = text.slice(0,text.indexOf("\n"));// easier solution is text.trim();
+        
+        alert(text+ ": " + elem.querySelectorAll("li").length); // another solution instead of elem.query li.getElementsByTagName('li').length
+
+    }
+  </script>
+
+</body>
+</html>

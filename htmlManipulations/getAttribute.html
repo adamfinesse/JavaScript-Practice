@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+  <div data-widget-name="menu">Choose the genre</div>
+
+  <script>
+      //https://javascript.info/task/get-user-attribute
+
+        alert(document.body.firstElementChild.getAttribute("data-widget-name"));
+        alert(document.body.firstElementChild.dataset.widgetName);
+
+        /*
+        or let elem = document.querySelector('[data-widget-name]'); then use the two above
+        */
+  </script>
+</body>
+</html>
