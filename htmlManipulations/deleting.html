@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html>
+    <body>
+        <ol id="elem">
+            <li>Hello</li>
+            <li>World</li>
+          </ol>
+          
+          <script>
+            function clear(elem) { 
+                for(let li of elem.querySelectorAll("li")){
+                    elem.remove(li);
+                }
+             }
+             /*
+             function clear(elem) {
+                while (elem.firstChild) {
+                    elem.firstChild.remove();
+                }
+            }
+
+            or
+
+            function clear(elem) {
+                elem.innerHTML = '';
+            }
+            */     
+            clear(elem); // clears the list
+          </script>
+    </body>
+</html>

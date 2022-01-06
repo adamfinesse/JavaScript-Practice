@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <h1>
+            <strong>CREATE A LIST</strong>
+        </h1>
+
+        <script>
+            
+            //https://javascript.info/task/create-list
+
+
+            let list = document.createElement("ul");
+            document.body.append(list);
+            let contents;
+
+            while(contents = prompt("enter the contents to the list","")){
+
+                let li =document.createElement("li");
+                li.textContent = contents;
+                list.append(li);
+
+            }
+            
+        </script>
+    </body>
+</html>
