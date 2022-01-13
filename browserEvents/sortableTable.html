@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    table {
+       border-collapse: collapse;
+     }
+     th, td {
+       border: 1px solid black;
+       padding: 4px;
+     }
+     th {
+       cursor: pointer;
+     }
+     th:hover {
+       background: yellow;
+     }
+  </style>
+</head>
+
+<body>
+
+  <table id="grid">
+    <thead>
+      <tr>
+        <th data-type="number">Age</th>
+        <th data-type="string">Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>5</td>
+        <td>John</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Pete</td>
+      </tr>
+      <tr>
+        <td>12</td>
+        <td>Ann</td>
+      </tr>
+      <tr>
+        <td>9</td>
+        <td>Eugene</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>Ilya</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script>
+
+    //https://javascript.info/task/sortable-table
+    grid.addEventListener('click',function(event){
+        let clicked = event.target;
+
+        if(clicked.tagName != "TH") return;
+        let tbody = grid.querySelector("tbody");
+
+        if(clicked.dataset.type == "number"){
+            let tbodyRows = Array.from(tbody.rows).map((a) => a.innerText).sort((a,b) => parseInt(a) - parseInt(b));
+
+            for(let row of tbody.rows){
+              let splitArr = tbodyRows.shift().split("\t")
+              row.innerHTML = "<td>"+splitArr[0]+"</td>" + "<td>"+splitArr[1]+"</td>";
+            }
+
+            // it sorts correctly but when replacing it is using ilya and john repeatedly, maybe has something to do with the reference not sure. (update below)
+            // you cant just update the innerHTML after its sorted because they are references to the object, so for ex when row 1 was updated with ilya
+            // the array spot 0 was also placed to be ilya since it stores a live reference which is always changed, so to fix I needed to parse out only the innerText
+            // which isnt a reference, then build a new row for each row split with the new text.
+
+            //online solution is different in some aspects but interesting
+        }
+
+        if(clicked.dataset.type == "string"){
+          let tbodyRows = Array.from(tbody.rows).map((a) => a.innerText).sort((a,b) => a.split('\t')[1].localeCompare(b.split('\t')[1]));
+          //tbodyRows.sort((a,b) => a.split('\t')[1].localeCompare(b.split('\t')[1])); can use above since map returns array, probably could have used a for each after aswell
+          // with whats inside the forloop below for a 1 liner
+          
+          for(let row of tbody.rows){
+              let splitArr = tbodyRows.shift().split("\t")
+              row.innerHTML = "<td>"+splitArr[0]+"</td>" + "<td>"+splitArr[1]+"</td>";
+            }
+        }
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+
+    .tree span:hover {
+      font-weight: bold;
+    }
+
+    .tree span {
+      cursor: pointer;
+    }
+  
+  </style>
+</head>
+<body>
+
+  <ul class="tree" id="tree">
+    <li><span>Animals</span>
+      <ul>
+        <li><span>Mammals</span>
+          <ul>
+            <li><span>Cows</span></li>
+            <li><span>Donkeys</span></li>
+            <li><span>Dogs</span></li>
+            <li><span>Tigers</span></li>
+          </ul>
+        </li>
+        <li><span>Other</span>
+          <ul>
+            <li><span>Snakes</span></li>
+            <li><span>Birds</span></li>
+            <li><span>Lizards</span></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><span>Fishes</span>
+      <ul>
+        <li><span>Aquarium</span>
+          <ul>
+            <li><span>Guppy</span></li>
+            <li><span>Angelfish</span></li>
+          </ul>
+        </li>
+        <li><span>Sea</span>
+          <ul>
+            <li><span>Sea trout</span></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+</body>
+<script>
+    // i hard coded the spans, this is how u would do it normally without it
+
+    /*
+    // move all text into <span>
+    // they occupy exactly the place necessary for the text,
+    for (let li of tree.querySelectorAll('li')) {
+      let span = document.createElement('span');
+      li.prepend(span);
+      span.append(span.nextSibling); // move the text node into span
+    }
+    */
+    document.getElementById('tree').addEventListener('click',function(event){
+        let span = event.target;
+        if(span.tagName != "SPAN") return;
+        let ul = span.nextElementSibling;
+
+        if(!ul) return;
+
+        if(ul.tagName != 'UL') return;
+
+        ul.hidden = !ul.hidden;
+
+    });
+
+</script>
+</html>

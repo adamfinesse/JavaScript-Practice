@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+
+  </style>
+</head>
+
+<body>
+
+<h1>Scroll me</h1>
+
+<script>
+  // ... your code ...
+  //https://javascript.info/task/endless-page
+    // works if u make the document small enough for a scroll bar
+    document.addEventListener('scroll',function(event){
+        addDate()
+        })
+
+        function addDate(){
+            while(1){
+                if(document.documentElement.getBoundingClientRect().bottom > document.documentElement.clientHeight + 100) break;
+
+                let date = document.createElement('div');
+                date.innerHTML = new Date();
+                document.body.append(date);
+            }
+        }
+        addDate();
+</script>
+
+</body>
+</html>

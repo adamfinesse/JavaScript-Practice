@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        
+        <select id="genres">
+            <option value="rock">Rock</option>
+            <option value="blues" selected>Blues</option>
+          </select>
+
+          <script>
+              //https://javascript.info/task/add-select-option
+              
+              Array.from(genres.options).filter(option => option.selected).forEach(selected => alert(selected.value));
+              //  let selectedOption = genres.options[genres.selectedIndex];
+              //  alert( selectedOption.value );
+
+              genres[genres.options.length] = new Option("Classic","classic",true,true);
+              /*
+                let newOption = new Option("Classic", "classic");
+                genres.append(newOption);
+                newOption.selected = true;
+              */
+          </script>
+    </body>
+</html>

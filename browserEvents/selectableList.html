@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    .selected {
+      background: #0f0;
+    }
+
+    li {
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+  Click on a list item to select it.
+  <br>
+
+  <ul id="ul">
+    <li>Christopher Robin</li>
+    <li>Winnie-the-Pooh</li>
+    <li>Tigger</li>
+    <li>Kanga</li>
+    <li>Rabbit. Just rabbit.</li>
+  </ul>
+
+  <script>
+      //https://javascript.info/task/selectable-list
+      // solution makes mousedown event return false, somewhat the same as my event.prevent default
+    let selectedArr = [];
+    ul.addEventListener('click',function(event){
+        let target = event.target;
+
+        if(target.tagName != "LI") return;
+
+        if(event.ctrlKey || event.metaKey){
+            target.classList.add('selected');
+            selectedArr.push(target);
+        }
+        else{
+            selectedArr.forEach(a => a.classList.remove('selected'));
+            selectedArr = [];
+            target.classList.add('selected');
+            selectedArr.push(target)
+            
+        }
+        event.preventDefault()
+    })
+  </script>
+
+</body>
+</html>

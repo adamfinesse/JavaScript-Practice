@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    #contents {
+      padding: 5px;
+      border: 1px green solid;
+    }
+  </style>
+</head>
+
+<body>
+
+  <fieldset id="contents">
+    <legend>#contents</legend>
+    <p>
+      How about to read <a href="https://wikipedia.org">Wikipedia</a> or visit <a href="https://w3.org"><i>W3.org</i></a> and learn about modern standards?
+    </p>
+  </fieldset>
+
+</body>
+<script>
+    //https://javascript.info/task/catch-link-navigation
+    // solution used .onclick to make use of return false; I used addEventListener so I had to use preventDefault(); it also looked
+    // for the closest A (check comments) to always make sure it found the link, then it checked to make sure the A was inside contents which was good error checking
+    
+    contents.addEventListener('click',function(event){
+
+        let elem = event.target;
+        //let elem = event.target.closest('a');
+        let link;
+        if(elem.tagName == "A"){
+            link = elem.getAttribute('href')
+        }
+        else if(elem.tagName == "I"){
+            link = elem.closest('[href]');
+        }
+        if(!link){
+            event.preventDefault();
+            return;
+        }
+        let result = confirm(`leave for ${link}?`);
+
+        if(!result){
+            event.preventDefault();
+        }
+        
+
+    });
+</script>
+</html>

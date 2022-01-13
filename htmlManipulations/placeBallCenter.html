@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <style>
+    #field {
+      width: 200px;
+      border: 10px groove black;
+      background-color: #00FF00;
+      position: relative;
+    }
+
+    #ball {
+      position: absolute;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <div id="field">
+    <img src="https://en.js.cx/clipart/ball.svg" id="ball"> . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+  </div>
+
+<script>
+    //https://javascript.info/task/put-ball-in-center
+
+    let widthCenter = Math.round(field.clientWidth / 2 - ball.offsetWidth / 2); //half of the width of the field and half of the ball width is the exact center, same for height
+    let heightCenter = Math.round(field.clientHeight / 2 - ball.offsetHeight / 2);
+
+    ball.style.top = heightCenter +"px";
+    ball.style.left = widthCenter +"px";
+    
+</script>
+
+</body>
+
+</html>

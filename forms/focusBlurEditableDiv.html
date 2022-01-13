@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <link type="text/css" rel="stylesheet" href="my.css">
+  <meta charset="utf-8">
+</head>
+
+<body>
+
+  <ul>
+    <li>Click the div to edit.</li>
+    <li>Enter or blur saves the result.</li>
+  </ul>
+
+  HTML is allowed.
+
+  <div id="view" class="view">Text</div>
+
+  <script>
+    // ...your code...
+    // Note: <textarea> should have class="edit"
+    // my.css has styles to make it the same size as div
+    //https://javascript.info/task/editable-div
+
+    //solution is more elegant and places cursor onthe right instead of left like mine, utilizes replaceWith() instead of removing and creating each time.
+    let div;
+    let textarea;
+    view.tabIndex = '1';
+
+    view.addEventListener('click',function(event){
+        createTextArea(view.innerHTML);
+    })
+
+    function removeTextArea(event){
+        div.innerHTML = textarea.value;
+        document.body.append(div)
+        textarea.blur()
+        textarea.remove();
+    }
+
+    function createTextArea(html){
+        textarea = document.createElement("textarea");
+        textarea.classList.add('edit');
+        textarea.innerHTML=html;
+
+        let viewCoords = view.getBoundingClientRect();
+        textarea.style.top = viewCoords.top +"px";
+        textarea.style.left = viewCoords.left+"px";
+
+        textarea.addEventListener('blur',removeTextArea);
+
+        textarea.addEventListener("keydown",function(event){
+        if(event.code == "Enter"){
+            event.target.blur();
+        }
+        })
+        document.body.append(textarea);
+        textarea.focus();
+        div = view;
+        view.remove();
+    }
+  </script>
+
+</body>
+</html>

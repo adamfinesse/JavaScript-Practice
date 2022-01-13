@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+
+  <div id="prompt-form-container">
+    <form id="prompt-form">
+      <div id="prompt-message">Enter something...
+        <br>Please..</div>
+      <input name="text" type="text">
+      <input type="submit" value="Ok">
+      <input type="button" name="cancel" value="Cancel">
+    </form>
+  </div>
+
+
+</body>
+<script>
+    document.getElementById("prompt-form-container").hidden = true;
+
+    createButton();
+    function createButton(){
+
+        let button = document.createElement('button');
+        button.innerHTML = "click to show the form"
+        document.body.prepend(button);
+        let div = document.createElement('div')
+        div.innerHTML = "Click the Button Below";
+        document.body.prepend(div)
+
+        button.onclick = function(){
+
+            document.getElementById("prompt-form-container").hidden = false;
+
+            showPrompt("Enter something<br>...smart :)", function(value) {
+            alert(value);
+            });
+        };
+
+    }
+
+    function showPrompt(html,callback){
+
+        let form = document.getElementById('prompt-form');
+
+        form.onsubmit = function(){
+            event.preventDefault()
+            document.getElementById("prompt-form-container").hidden = true;
+            callback(form.elements['text'].value)
+            form.elements[0].value = ''
+        }
+
+        form.elements[2].onclick = function(){
+            document.getElementById("prompt-form-container").hidden = true;
+            form.elements[0].value = ''
+            callback(null);
+        }
+        form.onkeydown = function(event){
+            if(event.code == "Escape"){            
+                document.getElementById("prompt-form-container").hidden = true;
+                form.elements[0].value = ''
+                callback(null);
+            }
+        }
+
+        form.elements[0].focusout = function(event){
+            console.log(event)
+            form.focus()
+        }
+    }
+
+</script>
+</html>

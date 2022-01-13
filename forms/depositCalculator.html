@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    td select,
+    td input {
+      width: 150px;
+    }
+
+    #diagram td {
+      vertical-align: bottom;
+      text-align: center;
+      padding: 10px;
+    }
+
+    #diagram div {
+      margin: auto;
+    }
+  </style>
+</head>
+
+<body>
+
+  Deposit calculator.
+
+  <form name="calculator">
+    <table>
+      <tr>
+        <td>Initial deposit</td>
+        <td>
+          <input name="money" type="number" value="10000" required>
+        </td>
+      </tr>
+      <tr>
+        <td>How many months?</td>
+        <td>
+          <select name="months">
+            <option value="3">3 (minimum)</option>
+            <option value="6">6 (half-year)</option>
+            <option value="12" selected>12 (one year)</option>
+            <option value="18">18 (1.5 years)</option>
+            <option value="24">24 (2 years)</option>
+            <option value="30">30 (2.5 years)</option>
+            <option value="36">36 (3 years)</option>
+            <option value="60">60 (5   years)</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Interest per year?</td>
+        <td>
+          <input name="interest" type="number" value="5" required>
+        </td>
+      </tr>
+    </table>
+
+
+  </form>
+
+
+  <table id="diagram">
+    <tr>
+      <th>Was:</th>
+      <th>Becomes:</th>
+    </tr>
+    <tr>
+      <th id="money-before"></th>
+      <th id="money-after"></th>
+    </tr>
+    <td>
+      <div style="background: red;width:40px;height:100px"></div>
+    </td>
+    <td>
+      <div style="background: green;width:40px;height:0" id="height-after"></div>
+    </td>
+  </table>
+
+  <script>
+
+    let form = document.forms.calculator;
+
+    // your code
+    //https://javascript.info/task/deposit-calculator
+    updateCalculations();
+    form.oninput = updateCalculations;
+
+    function updateCalculations(event){
+        let initial = +form.elements['money'].value;
+        let interest = +form.elements['interest'].value <10 ? '.0'+ form.elements['interest'].value : form.elements['interest'].value.slice(0,2) + '.' + form.elements['interest'].value.slice(2);
+        let months = Array.from(form.elements['months'].options).find(option => option.selected).value;
+
+        //let ths = diagram.querySelectorAll("th");
+        
+        let result = Math.round(initial * (1 + +interest) ** (months/12));
+
+        //ths[0].innerHTML = 'Was:<br>' + initial; 
+        //ths[1].innerHTML = "Becomes:<br>" + result;
+        document.getElementById('money-before').innerHTML = initial;
+        document.getElementById('money-after').innerHTML = result;
+
+        let bar = diagram.rows[2].lastElementChild.firstElementChild;
+        if(result > initial){       
+            //bar.style.height = 100 + +form.elements['interest'].value +'px';
+            document.getElementById('height-after').style.height = 100 + +form.elements['interest'].value +'px';
+        }
+        else{
+            //bar.style.height = 100 +"px"
+            document.getElementById('height-after').style.height = 100 +'px';
+        }
+    }
+  </script>
+
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+.editTd .editArea {
+    border: none;
+    margin: 0;
+    padding: 0;
+    display: block;
+  
+    /* remove resizing handle in Firefox */
+    resize: none;
+  
+    /* remove outline on focus in Chrome */
+    outline: none;
+  
+    /* remove scrollbar in IE */
+    overflow: auto;
+  }
+  
+  .editControls {
+    position: absolute;
+  }
+  
+  .editTd {
+    position: relative;
+    padding: 0;
+  }

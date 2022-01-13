@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    #mouse {
+      display: inline-block;
+      cursor: pointer;
+      margin: 0;
+    }
+
+    #mouse:focus {
+      outline: 1px dashed black;
+    }
+  </style>
+</head>
+
+<body>
+
+  <p>Click on the mouse and move it with arrow keys.</p>
+
+  <pre id="mouse">
+ _   _
+(q\_/p)
+ /. .\
+=\_t_/=   __
+ /   \   (
+((   ))   )
+/\) (/\  /
+\  Y  /-'
+ nn^nn
+</pre>
+
+
+  <script>
+    // ...your code...
+    //https://javascript.info/task/keyboard-mouse
+
+    mouse.tabIndex="0"
+    mouse.onclick = function(event){
+      //mouse.focus()
+      mouse.onkeydown= function(event){
+
+        mouse.style.position = 'absolute';
+        mouseCoords = mouse.getBoundingClientRect();
+
+        if(event.code == "ArrowRight"){
+          mouse.style.left = mouseCoords.left+ 50 +"px";
+        }
+        if(event.code == "ArrowLeft"){
+          mouse.style.left = mouseCoords.left-50 +"px";
+        }
+        if(event.code == "ArrowUp"){
+          mouse.style.top = mouseCoords.top-50 +"px";
+        }
+        if(event.code == "ArrowDown"){
+          mouse.style.top = mouseCoords.top+ 50 +"px";
+        }
+      }
+    }
+    
+  </script>
+
+</body>
+
+</html>

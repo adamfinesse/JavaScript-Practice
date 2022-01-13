@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    body {
+      height: 2000px;
+      /* make body scrollable, the tooltip should work after the scroll */
+    }
+
+    .tooltip {
+      /* some styles for the tooltip, you can use your own instead */
+      position: fixed;
+      padding: 10px 20px;
+      border: 1px solid #b3c9ce;
+      border-radius: 4px;
+      text-align: center;
+      font: italic 14px/1.3 sans-serif;
+      color: #333;
+      background: #fff;
+      box-shadow: 3px 3px 3px rgba(0, 0, 0, .3);
+
+    }
+  </style>
+</head>
+
+<body>
+    <button data-tooltip="the tooltip is longer than the element">Short button</button>
+    <button data-tooltip="HTML<br>tooltip">One more button</button>
+  <p>LaLaLa LaLaLa LaLaLa LaLaLa LaLaLa LaLaLa LaLaLa LaLaLa LaLaLa</p>
+  <p>LaLaLa LaLaLa LaLaLa LaLaLa LaLaLa LaLaLa LaLaLa LaLaLa LaLaLa</p>
+
+  <button data-tooltip="the tooltip is longer than the element">Short button</button>
+  <button data-tooltip="HTML<br>tooltip">One more button</button>
+
+  <p>Scroll the page to make buttons appear on the top, check if the tooltips show up correctly.</p>
+
+
+  <script>
+    //https://javascript.info/task/behavior-tooltip
+
+    // solution has a more elegant style maybe even more functional
+    let tooltip;
+
+    document.addEventListener('mouseover',function(event){
+        if(event.target.dataset.tooltip == undefined) return;
+
+        if (!event.target.dataset.tooltip) return;
+
+        let elem = event.target;
+        let elemCoords = elem.getBoundingClientRect();
+
+        tooltip = document.createElement('div');
+        tooltip.className = 'tooltip';
+        tooltip.innerHTML = event.target.dataset.tooltip; //add text for accurate dimensions
+        elem.append(tooltip);// the tooltip doesnt have height until its added to the DOM
+
+        if(tooltip.clientWidth > elemCoords.width && tooltip.clientHeight < elemCoords.top){
+
+            tooltip.style.top = elemCoords.top - 5 - tooltip.clientHeight + "px";
+            tooltip.style.left = 0 +'px'
+            return;
+
+        }
+       if(tooltip.clientHeight > elemCoords.top && tooltip.clientWidth > elemCoords.width){
+
+            tooltip.style.top = elemCoords.top + 5 + elem.clientHeight + "px";
+            tooltip.style.left = 0 +'px'
+            return;
+
+        }
+        if(tooltip.clientWidth < elemCoords.width && tooltip.clientHeight < elemCoords.top){
+
+            tooltip.style.top = elemCoords.top - 5 - tooltip.clientHeight + "px";
+            tooltip.style.left = elemCoords.right - elemCoords.width/2 - tooltip.clientWidth/2 + "px"
+            return;
+
+        }
+        tooltip.style.top = elemCoords.top + 5 + elem.clientHeight + "px";
+        tooltip.style.left = elemCoords.right - elemCoords.width/2 - tooltip.clientWidth/2 + "px"
+        
+    });
+    
+    document.addEventListener('mouseout',function(event){
+
+        if(tooltip){
+            tooltip.remove();
+            tooltip= null;
+        }
+        
+    });
+  </script>
+
+</body>
+</html>

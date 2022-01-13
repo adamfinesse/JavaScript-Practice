@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        change runOnKeys to the keys (can be any amt of keys) that when pressed down runs func
+        <script>
+            //https://javascript.info/task/check-sync-keydown
+            runOnKeys(
+                () => alert("Hello!"),
+                "KeyQ",
+                "KeyW",
+                "KeyY"
+            );
+            let keySet = new Set;
+            function runOnKeys(func,...keys){
+                document.addEventListener('keydown',function(event){
+                keySet.add(event.code);
+
+                let allKeysPressed = true;
+
+                for(let key of keys){
+                    if(!keySet.has(key)) allKeysPressed = false;
+                }
+                
+                if(allKeysPressed ){
+                    func.call();
+                    keySet.clear();
+                }
+                });
+
+            }
+            document.addEventListener('keyup',function(event){
+                if(keySet.has(event.code)) keySet.delete(event.code)
+            })
+        </script>
+    </body>
+</html>

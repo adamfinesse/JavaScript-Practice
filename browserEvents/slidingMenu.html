@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+      #closed{
+          color: green;
+          cursor: pointer;
+      }
+
+      #open{
+          color: green;
+          cursor: pointer;
+      }
+
+</style>
+</head>
+<body>
+
+  
+  <span id = 'closed'>▶ Sweeties (click me)!</span> 
+  <span id = 'open' hidden = true>▼ Sweeties (click me)!</span>
+
+
+  <ul>
+    <li>Cake</li>
+    <li>Donut</li>
+    <li>Honey</li>
+  </ul>
+
+
+  <script>
+      //https://javascript.info/task/sliding-menu
+      // solution did it much better, go back and do this task once I complete HTML and CSS tutorials
+      let ul = document.querySelector('ul');
+      let closed = document.getElementById("closed");
+      let openSpan = document.getElementById("open");
+      
+      ul.hidden = true
+      closed.addEventListener('click',open);
+      openSpan.addEventListener('click',close);
+    function open(Event){
+
+        closed.hidden = true;
+        openSpan.hidden = false
+        ul.hidden = false;
+
+    }
+
+    function close(event){
+        openSpan.hidden = true;
+        closed.hidden = false;
+        ul.hidden =true;
+    }
+
+  </script>
+</body>
+</html>

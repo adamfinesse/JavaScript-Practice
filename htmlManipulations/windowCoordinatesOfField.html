@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="index.css">
+  <script>
+    document.onclick = function(e) { // shows click coordinates
+      coords.innerHTML = e.clientX + ':' + e.clientY;
+    };
+  </script>
+  
+</head>
+
+<body>
+
+  Click anywhere to get window coordinates.
+  <br> That's for testing, to check the result you get by JavaScript.
+  <br>
+  <div id="coords">(click coordinates show up here)</div>
+
+
+  <div id="field">
+    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+  </div>
+
+
+  <div class="triangle-right" style="left:-20px;top:-176px">1</div>
+  <div class="triangle-right" style="left:-10px;top:-178px">3</div>
+  <div class="triangle-right" style="left:190px;top:-40px">4</div>
+  <div class="triangle-right" style="left:200px;top:-42px">2</div>
+
+
+  <script>
+    // https://javascript.info/task/find-point-coordinates
+    let triangles = document.body.querySelectorAll(".triangle-right");
+
+    let oneCoords = triangles[0].getBoundingClientRect();
+    let twoCoords = triangles[3].getBoundingClientRect();
+    let threeCoords = triangles[1].getBoundingClientRect();
+    let fourCoords = triangles[2].getBoundingClientRect();
+
+    console.log(twoCoords);
+    console.log("One Coords = "+oneCoords.right + ":" + (oneCoords.top + oneCoords.height/2));
+    console.log("Two Coords = "+twoCoords.right + ":" + (twoCoords.bottom - twoCoords.height/2));
+    console.log("Three Coords = "+threeCoords.right+ ":"+(threeCoords.top + threeCoords.height/2));
+    console.log("four Coords = "+fourCoords.right + ":" + (fourCoords.bottom - fourCoords.height/2));
+
+    /*
+    bottom: 88
+    height: 12
+    left: 8
+    right: 28
+    top: 76
+    width: 20
+    x: 8
+    y: 76
+    */
+
+  </script>
+
+</body>
+</html>
