@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html>
+<body>
+
+  <ul>
+    <li>Animals
+      <ul>
+        <li>Mammals
+          <ul>
+            <li>Cows</li>
+            <li>Donkeys</li>
+            <li>Dogs</li>
+            <li>Tigers</li>
+          </ul>
+        </li>
+        <li>Other
+          <ul>
+            <li>Snakes</li>
+            <li>Birds</li>
+            <li>Lizards</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Fishes
+      <ul>
+        <li>Aquarium
+          <ul>
+            <li>Guppy</li>
+            <li>Angelfish</li>
+          </ul>
+        </li>
+        <li>Sea
+          <ul>
+            <li>Sea trout</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+  <script>
+    //https://javascript.info/task/tree-count
+    let lis = document.getElementsByTagName('li');
+
+    for (let li of lis) {
+    // get the count of all <li> below this <li>
+    let descendantsCount = li.getElementsByTagName('li').length;
+    if (!descendantsCount) continue;
+
+    // add directly to the text node (append to the text)
+    li.firstChild.data += ' [' + descendantsCount + ']';
+    }
+
+      /* //my sol its ight
+    function showDecendants(){
+        let ul = document.body.firstElementChild;
+
+        console.log(lis)
+        for(let li of ul.children){
+
+        li.firstChild.data = li.firstChild.data + ` [${li.firstElementChild.querySelectorAll("ul li").length}]`;
+
+            for(let childLi of li.firstElementChild.children){
+                childLi.firstChild.data = childLi.firstChild.data + ` [${childLi.querySelectorAll("li").length}]`;
+            }
+            
+        }
+    }
+    showDecendants();
+    */
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<h1>Create Tree From Object</h1>
+<head>
+  <meta charset="utf-8">
+</head>
+
+<body>
+
+  <div id="tree"></div>
+
+  <!-- The result should be:
+<div id="tree">
+<ul>
+  <li>Fish
+    <ul>
+      <li>trout</li>
+      <li>salmon</li>
+    </ul>
+  </li>
+  <li>Trees
+    <ul>
+      <li>Huge
+        <ul>
+          <li>sequoia</li>
+          <li>oak</li>
+        </ul>
+      </li>
+      <li>Flowering
+        <ul>
+          <li>apple tree</li>
+          <li>magnolia</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+</div>
+-->
+
+  <script>
+    //https://javascript.info/task/create-object-tree
+    let data = {
+      "Fish": {
+        "trout": {},
+        "salmon": {}
+      },
+
+      "Tree": {
+        "Huge": {
+          "sequoia": {},
+          "oak": {}
+        },
+        "Flowering": {
+          "apple tree": {},
+          "magnolia": {}
+        }
+      }
+    };
+
+    /* much better solutions my sol was trash
+        function createTree(container, obj) {
+      container.innerHTML = createTreeText(obj);
+    }
+
+    function createTreeText(obj) { // standalone recursive function
+      let li = '';
+      let ul;
+      for (let key in obj) {
+        li += '<li>' + key + createTreeText(obj[key]) + '</li>';
+      }
+      if (li) {
+        ul = '<ul>' + li + '</ul>'
+      }
+      return ul || '';
+    }
+
+    or
+
+        function createTree(container, obj) {
+      container.append(createTreeDom(obj));
+    }
+
+    function createTreeDom(obj) {
+      // if there's no children, then the call returns undefined
+      // and the <ul> won't be created
+      if (!Object.keys(obj).length) return;
+
+      let ul = document.createElement('ul');
+
+      for (let key in obj) {
+        let li = document.createElement('li');
+        li.innerHTML = key;
+
+        let childrenUl = createTreeDom(obj[key]);
+        if (childrenUl) {
+          li.append(childrenUl);
+        }
+
+        ul.append(li);
+      }
+
+      return ul;
+    }
+
+    let container = document.getElementById('container');
+    */
+
+    function createTree(container, data) {
+        let objOuter = document.createElement("ul");
+        
+        for(let obj of Object.keys(data)){
+
+            let objLI = document.createElement("li");
+            objLI.textContent = obj;
+            objOuter.append(objLI);
+            let objInner = document.createElement("ul");
+
+                for(let innerObj of Object.keys(data[obj])){
+                let innerLi = document.createElement("li");
+                innerLi.textContent = innerObj;
+                objInner.append(innerLi)
+
+                let ulInner = document.createElement('ul');
+
+                for(let thirdinner of Object.keys(data[obj][innerObj])){
+
+                console.log(thirdinner);
+                let Li = document.createElement("li");
+                Li.textContent = thirdinner;
+                ulInner.append(Li)
+                objInner.append(ulInner);
+                }
+
+            }
+            objOuter.append(objInner);
+        }
+        container.append(objOuter)
+    }
+
+    createTree(document.getElementById('tree'), data);
+  </script>
+
+</body>
+</html>
